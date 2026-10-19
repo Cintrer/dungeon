@@ -6,16 +6,11 @@ Puis ouvrir http://127.0.0.1:8000/docs
 """
 
 from contextlib import asynccontextmanager
-
 from fastapi import FastAPI
-
 from app.database import create_db_and_tables
-
-# TODO (palier 1) : importez ici vos modèles de tables pour que SQLModel les connaisse
-# from app.models.hero import Hero  # noqa: F401
-
-# TODO : importez vos routers
-# from app.routes import heroes
+from app.routes import heroes 
+from sqlmodel import SQLModel 
+from app.models.hero import Hero
 
 
 @asynccontextmanager
@@ -32,9 +27,15 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# TODO : branchez vos routers
-# app.include_router(heroes.router)
+@app.on_event("startup")
+def on_startup():
+    create_db_and_tables()
 
+app.include_router(heroes.router)
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 @app.get("/health", tags=["Système"])
 def health() -> dict:

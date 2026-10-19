@@ -12,3 +12,14 @@ class RoomResponse(BaseModel):
     description: str
     sorties: List[str]
     monstre: Optional[str] = None
+
+
+class AttackResponse(BaseModel):
+    degats_infliges: int
+    critique: bool
+    degats_subis: int
+    pv_heros: int
+    pv_monstre: int
+    issue: str
+    or_gagne: int
+    victoire: bool

@@ -29,6 +29,22 @@ fastapi dev app/main.py
 Ouvrez ensuite http://127.0.0.1:8000/docs : la route `GET /health` doit répondre
 `{"status": "ok", ...}`. Si c'est le cas, vous êtes prêts.
 
+## Authentification et héros
+
+Les routes `/heroes` nécessitent un jeton Bearer. Créez d'abord un compte avec
+`POST /auth/register`, puis connectez-vous avec `POST /auth/login` en envoyant
+un formulaire `username` / `password`. Le jeton renvoyé est valable deux heures.
+Dans Swagger, cliquez sur **Authorize** pour l'utiliser ; chaque compte ne voit
+et ne peut modifier que ses propres héros.
+
+Pour conserver les jetons valides entre redémarrages, définissez une variable
+d'environnement `SECRET_KEY` stable et confidentielle avant de lancer l'API.
+Sans cette variable, une clé aléatoire de développement est générée au démarrage.
+
+Les combats se font avec `POST /heroes/{id}/attack` et le repos avec
+`POST /heroes/{id}/rest`. Le repos restaure les PV après une pause asynchrone
+de trois secondes et est indisponible pendant un combat.
+
 ## Structure
 
 ```

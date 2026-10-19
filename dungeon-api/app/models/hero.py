@@ -14,4 +14,4 @@ class Hero(SQLModel, table=True):
     or_: int = 0
     monstre_pv: Optional[int] = None
     victoire: bool = False
-    owner_id: Optional[int] = None # 
+    owner_id: Optional[int] = Field(default=None, foreign_key="user.id")

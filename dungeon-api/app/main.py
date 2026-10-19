@@ -6,11 +6,13 @@ Puis ouvrir http://127.0.0.1:8000/docs
 """
 
 from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
+
 from app.database import create_db_and_tables
-from app.routes import heroes 
-from sqlmodel import SQLModel 
-from app.models.hero import Hero
+from app.models.hero import Hero  # noqa: F401
+from app.models.user import User  # noqa: F401
+from app.routes import auth, heroes
 
 
 @asynccontextmanager
@@ -27,15 +29,9 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-@app.on_event("startup")
-def on_startup():
-    create_db_and_tables()
-
 app.include_router(heroes.router)
+app.include_router(auth.router)
 
-@app.get("/health")
-def health():
-    return {"status": "ok"}
 
 @app.get("/health", tags=["Système"])
 def health() -> dict:

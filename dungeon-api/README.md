@@ -29,7 +29,8 @@ fastapi dev app/main.py
 Ouvrez ensuite http://127.0.0.1:8000/docs : la route `GET /health` doit répondre
 `{"status": "ok", ...}`. Si c'est le cas, vous êtes prêts.
 
-## Authentification et héros
+Authentification et héros
+-------------------------
 
 Les routes `/heroes` nécessitent un jeton Bearer. Créez d'abord un compte avec
 `POST /auth/register`, puis connectez-vous avec `POST /auth/login` en envoyant

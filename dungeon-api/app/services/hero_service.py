@@ -3,10 +3,10 @@ from app.models.hero import Hero
 from app.schemas.hero import HeroCreate
 from app.services.dungeon_map import START_ROOM
 
-def create_hero(session: Session, hero_in: HeroCreate, owner_id: int | None = None):
-    # Calcul des PV max comme demandé : 20 + force * 2
+def create_hero(session: Session, hero_in: HeroCreate, owner_id: int | None = None):    #calcul des PV max comme demandé : 20 + force * 2
     pv_max = 20 + (hero_in.force * 2)
 
+#on crée l'objet pour la base de données
     nouveau_heros = Hero(
         nom=hero_in.nom,
         classe=hero_in.classe,
@@ -20,6 +20,7 @@ def create_hero(session: Session, hero_in: HeroCreate, owner_id: int | None = No
         owner_id=owner_id,
     )
 
+#on sauvegarde dans la base de données
     session.add(nouveau_heros)
     session.commit()
     session.refresh(nouveau_heros)

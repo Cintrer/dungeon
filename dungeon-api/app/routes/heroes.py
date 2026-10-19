@@ -98,7 +98,7 @@ def get_heroes(
     return [format_hero_response(h) for h in heroes]
 
 
-# FT-3 : consulter un héros par son ID
+#FT-3 consulter un héros par son ID
 @router.get("/{id}", response_model=HeroResponse)
 def get_hero(
     id: int,
@@ -115,7 +115,7 @@ def get_hero(
     return format_hero_response(hero)
 
 
-# FT-5 : description de la salle
+#FT-5 description de la salle
 @router.get("/{id}/room", response_model=RoomResponse)
 def get_hero_room(
     id: int,
@@ -132,7 +132,7 @@ def get_hero_room(
     return format_room_response(hero)
 
 
-# FT-6 : déplacement du héros
+#FT-6 déplacement du héros
 @router.post("/{id}/move", response_model=RoomResponse)
 def move_hero(
     id: int,
@@ -179,7 +179,6 @@ def move_hero(
     return format_room_response(hero)
 
 
-# FT-7 & FT-8 : attaque d'un monstre
 @router.post("/{id}/attack", response_model=AttackResponse)
 def attack_monster(
     id: int,
@@ -256,7 +255,6 @@ def attack_monster(
     )
 
 
-# FT-9 : repos asynchrone du héros
 @router.post("/{id}/rest", response_model=HeroResponse)
 async def rest_hero(
     id: int,
